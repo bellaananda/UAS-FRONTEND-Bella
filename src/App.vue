@@ -24,7 +24,7 @@
             </ul>
             <div class="d-flex">
               <!-- <router-link :to="{name: 'login'}" v-if="!loggedIn" class="btn btn-secondary">Login</router-link> -->
-              <a @click.prevent="logout" v-if="loggedIn" class="btn btn-secondary">Logout</a>
+              <a @click.prevent="logout" v-if="loggedIn" class="btn btn-light text-black">Logout</a>
             </div>
           </div>
         </div>

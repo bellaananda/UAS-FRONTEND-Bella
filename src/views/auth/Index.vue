@@ -15,7 +15,7 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Email</label>
                                     <input type="email" class="form-control" v-model="user.email"
-                                        placeholder="Masukkan Email">
+                                        placeholder="Masukkan Email" required>
                                     <div v-if="validation.email" class="mt-2 alert alert-danger">
                                         Masukkan Email
                                     </div>
@@ -24,7 +24,7 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Password</label>
                                     <input type="password" class="form-control" v-model="user.password"
-                                        placeholder="Masukkan Password">
+                                        placeholder="Masukkan Password" required>
                                     <div v-if="validation.password" class="mt-2 alert alert-danger">
                                         Masukkan Password
                                     </div>

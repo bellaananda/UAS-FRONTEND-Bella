@@ -7,7 +7,7 @@
                         <div class="card-body">
                             <span class="display-6">Daftar</span>
                             <hr>
-                            <form @submit.prevent="register">
+                            <form @submit.prevent="store">
 
                                 <div class="form-group mb-3">
                                     <label class="form-label">Nama Lengkap</label>
@@ -68,61 +68,53 @@
 </template>
 
 <script>
+    import { reactive, ref } from 'vue'
+    import { useRouter } from 'vue-router'
     import axios from 'axios'
 
     export default {
-        name: 'Register',
 
-        data() {
-            return {
-                //state user
-                user: [],
-                //state validation
-                validation: []
-            }
-        },
-        methods: {
-            register() {
+        setup() {
 
-                axios.get('http://localhost:8000/sanctum/csrf-cookie')
-                .then(response => {
+            const user = reactive({
+                name: '',
+                email: '',
+                password: '',
+                confirm_password: '',
+                role: ''
+            })
 
-                    //debug cookie
-                    console.log(response)
+            const validation = ref([])
+            const router = useRouter()
 
-                    axios.post('http://localhost:8000/api/register', {
-                        email: this.email,
-                        password: this.password,
-                        name: this.name,
-                        role: this.role
-                    }).then(res => {
+            function store() {
 
-                        console.log(res)
+                let name = user.name
+                let email = user.email
+                let password = user.password
+                let role = user.role
 
-                        if (res.data.success) {
-                            console.log(res)
-                            //redirect dashboard
-                            return this.$router.push({ name: 'login' })
-
-                        } else {
-                            console.log("error" + res)
-                        }
-
-                    }).catch(error => {
-                        console.log(error)
-                    })  
-
+                axios.post('http://localhost:8000/api/register', {
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: role
+                }).then(() => {
+                    router.push({
+                        name: 'login'
+                    })
+                }).catch(error => {
+                    //assign state validation with error
+                    validation.value = error.response.data
                 })
-
-                // if (!this.user.role) {
-                //     this.validation.password = role
-                // }
-
             }
-        },
-
-        mounted() {
-            return this.$router.push({ name: 'register' })
+            //return
+            return {
+                user,
+                validation,
+                router,
+                store
+            }
         }
     }
 </script>
