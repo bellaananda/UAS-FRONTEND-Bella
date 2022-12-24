@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card border-0 rounded shadow mt-5 mb-5">
                     <div class="card-body">
-                        <h4>EDIT DATA SISWA</h4>
+                        <h4>Edit Data Siswa</h4>
                         <hr>
                         <form @submit.prevent="update">
                             <div class="form-group mb-3">
@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="title" class="font-weight-bold form-label">E-mail</label>
+                                <label for="title" class="font-weight-bold form-label">Email</label>
                                 <input type="text" class="form-control" v-model="post.email" placeholder="Masukkan alamat email siswa">
                                 <!-- validation -->
                                 <div v-if="validation.email" class="mt-2 alert alert-danger">

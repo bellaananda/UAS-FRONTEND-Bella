@@ -48,7 +48,7 @@
                                 <div class="form-group mb-3">
                                     <label class="form-label">Hak Akses</label>
                                     <select class="form-select" required v-model="user.role">
-                                        <option value="Admin">Admin</option>
+                                        <option value="Admin" >Admin</option>
                                         <option value="User">User</option>
                                     </select>
                                     <div v-if="validation.role" class="mt-2 alert alert-danger">
@@ -83,61 +83,40 @@
         },
         methods: {
             register() {
-                if (this.email && this.password && this.name && this.confirm_password && this.role) {
-                    axios.get('http://localhost:8000/sanctum/csrf-cookie')
-                        .then(response => {
 
-                            //debug cookie
-                            console.log(response)
+                axios.get('http://localhost:8000/sanctum/csrf-cookie')
+                .then(response => {
 
-                            axios.post('http://localhost:8000/api/register', {
-                                email: this.email,
-                                password: this.password,
-                                name: this.name,
-                                role: this.role
-                            }).then(res => {
+                    //debug cookie
+                    console.log(response)
 
-                                //debug user login
-                                console.log(res)
+                    axios.post('http://localhost:8000/api/register', {
+                        email: this.email,
+                        password: this.password,
+                        name: this.name,
+                        role: this.role
+                    }).then(res => {
 
-                                if (res.data.success) {
+                        console.log(res)
 
-                                    //set localStorage
-                                    localStorage.setItem("loggedIn", "true")
+                        if (res.data.success) {
+                            console.log(res)
+                            //redirect dashboard
+                            return this.$router.push({ name: 'login' })
 
-                                    //set localStorage Token
-                                    localStorage.setItem("token", res.data.token)
-                                    localStorage.setItem("role", res.data.user.role)
+                        } else {
+                            console.log("error" + res)
+                        }
 
-                                    //change state
-                                    this.loggedIn = true
+                    }).catch(error => {
+                        console.log(error)
+                    })  
 
-                                    //redirect dashboard
-                                    return this.$router.push({ name: 'siswa.index' })
+                })
 
-                                } else {
-
-                                    //set state login failed
-                                    this.loginFailed = true
-
-                                }
-
-                            }).catch(error => {
-                                console.log(error)
-                            })
-
-                        })
-                }
-
-                this.validation = []
-
-                if (!this.user.email) {
-                    this.validation.email = true
-                }
-
-                if (!this.user.password) {
-                    this.validation.password = true
-                }
+                // if (!this.user.role) {
+                //     this.validation.password = role
+                // }
 
             }
         },

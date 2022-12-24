@@ -7,7 +7,7 @@
             <h4>Data Siswa</h4>
             <hr />
             <router-link :to="{ name: 'siswa.create' }" v-if="role === 'Admin'" class="btn btn-md btn-dark"
-              >TAMBAH SISWA</router-link
+              >Tambah Siswa</router-link
             >
             <table class="table table-striped mt-4 rounded">
               <thead class="thead-dark">
@@ -16,7 +16,7 @@
                   <th scope="col">Alamat</th>
                   <th scope="col">Kota</th>
                   <th scope="col">Provinsi</th>
-                  <th scope="col">E-mail</th>
+                  <th scope="col">Email</th>
                   <th v-if="role === 'Admin'" scope="col" colspan="2" class="text-center">Aksi</th>
                 </tr>
               </thead>
@@ -63,12 +63,18 @@ export default {
   data() {
     return {
       siswas: {},
-      role:null
+      role:null,
+      loggedIn: null
     };
   },
   mounted() {
-    this.getSiswas();
-    this.role = localStorage.getItem("role")
+    this.loggedIn = localStorage.getItem("loggedIn");
+    if (this.loggedIn) {
+      this.getSiswas();
+      this.role = localStorage.getItem("role")
+    } else {
+      return this.$router.push({ name: 'login' })
+    }
   },
   methods: {
     getSiswas(page) {
