@@ -4,6 +4,12 @@ import { createRouter, createWebHistory } from "vue-router";
 //define a routes
 const routes = [
     {
+        path: "/register",
+        name: "register",
+        component: () =>
+            import(/* webpackChunkName: "siswa.index" */ "@/views/auth/Register.vue"),
+    },
+    {
         path: "/login",
         name: "login",
         component: () =>

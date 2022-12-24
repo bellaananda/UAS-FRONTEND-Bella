@@ -7,47 +7,47 @@
                         <h4>TAMBAH SISWA</h4>
                         <hr>
                         <form @submit.prevent="store">
-                            <div class="form-group">
-                                <label for="title" class="font-weight-bold">Nama Siswa</label>
+                            <div class="form-group mb-3">
+                                <label for="title" class="font-weight-bold form-label">Nama Siswa</label>
                                 <input type="text" class="form-control" v-model="post.nama" placeholder="Masukkan nama siswa">
                                 <!-- validation -->
                                 <div v-if="validation.nama" class="mt-2 alert alert-danger">
                                     {{ validation.nama[0] }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="title" class="font-weight-bold">Alamat</label>
+                            <div class="form-group mb-3">
+                                <label for="title" class="font-weight-bold form-label">Alamat</label>
                                 <input type="text" class="form-control" v-model="post.alamat" placeholder="Nama jalan dan nomor rumah">
                                 <!-- validation -->
                                 <div v-if="validation.alamat" class="mt-2 alert alert-danger">
                                     {{ validation.alamat[0] }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="title" class="font-weight-bold">Kota</label>
+                            <div class="form-group mb-3">
+                                <label for="title" class="font-weight-bold form-label">Kota</label>
                                 <input type="text" class="form-control" v-model="post.kota" placeholder="Masukkan nama kota tempat tinggal">
                                 <!-- validation -->
                                 <div v-if="validation.kota" class="mt-2 alert alert-danger">
                                     {{ validation.kota[0] }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="title" class="font-weight-bold">Provinsi</label>
+                            <div class="form-group mb-3">
+                                <label for="title" class="font-weight-bold form-label">Provinsi</label>
                                 <input type="text" class="form-control" v-model="post.provinsi" placeholder="Masukkan nama provinsi tempat tinggal">
                                 <!-- validation -->
                                 <div v-if="validation.provinsi" class="mt-2 alert alert-danger">
                                     {{ validation.provinsi[0] }}
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label for="title" class="font-weight-bold">E-mail</label>
+                            <div class="form-group mb-3">
+                                <label for="title" class="font-weight-bold form-label">E-mail</label>
                                 <input type="text" class="form-control" v-model="post.email" placeholder="Masukkan alamat email siswa">
                                 <!-- validation -->
                                 <div v-if="validation.email" class="mt-2 alert alert-danger">
                                     {{ validation.email[0] }}
                                 </div>
                             </div>
-                            <button type="submit" class="btn btn-primary">SIMPAN</button>
+                            <button type="submit" class="btn btn-dark mt-5 float-end">Simpan</button>
                         </form>
                     </div>
                 </div>

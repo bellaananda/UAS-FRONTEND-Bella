@@ -11,7 +11,7 @@
   <div id="app">
     <header>
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid mx-2">
           <a class="navbar-brand">
             <router-link :to="{name: 'siswa.index'}" class="navbar-brand">V3421024</router-link>
           </a>
@@ -21,14 +21,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <router-link :to="{name: 'siswa.index'}" class="nav-link">HOME</router-link>
-              </li>
-              <li class="nav-item float-end">
-              </li>
             </ul>
             <div class="d-flex">
-              <router-link :to="{name: 'login'}" v-if="!loggedIn" class="btn btn-secondary">Login</router-link>
+              <!-- <router-link :to="{name: 'login'}" v-if="!loggedIn" class="btn btn-secondary">Login</router-link> -->
               <a @click.prevent="logout" v-if="loggedIn" class="btn btn-secondary">Logout</a>
             </div>
           </div>
@@ -43,26 +38,33 @@
 </template>
 
 <script>
+  import axios from 'axios'
   export default {
     name: 'App',
 
     data() {
       return {
-        loggedIn: null
+        loggedIn: null,
+        role:null
       }
     },
 
     methods: {
       getLoggedIn() {
-        this.loggedIn = localStorage.getItem("loggedIn")
+        this.loggedIn = localStorage.getItem("loggedIn"),
+        this.role = localStorage.getItem("role")
       },
       logout() {
-        //change state
-        this.loggedIn = false
+            axios.get('http://localhost:8000/api/logout')
+            .then(() => {
+                //remove localStorage
+                localStorage.removeItem("loggedIn")    
 
-        //redirect dashboard
-        return this.$router.push({ name: 'home' })
-      }
+
+                //redirect
+                return this.$router.push({ name: 'login' })
+            })
+        }
     },
 
     watch: {
