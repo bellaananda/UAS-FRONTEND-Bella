@@ -43,7 +43,7 @@
               </tbody>
             </table>
 
-            <Bootstrap5Pagination :data="siswas" @pagination-change-page="getSiswas" variant="secondary" />
+            <Bootstrap5Pagination :data="siswas" @pagination-change-page="getSiswas" />
           </div>
         </div>
       </div>

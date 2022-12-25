@@ -87,7 +87,6 @@
                                     //set localStorage Token
                                     localStorage.setItem("token", res.data.token)
                                     localStorage.setItem("role", res.data.user.role)
-
                                     //change state
                                     this.loggedIn = true
 
